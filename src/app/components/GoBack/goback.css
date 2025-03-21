@@ -1,0 +1,17 @@
+.goback-button {
+    background-color: var(--light-color);
+    padding: 1vw 2vw;
+    border: none;
+    cursor: pointer;
+    position: fixed;
+    top: 0vw;
+    right: 0vw;
+    z-index: 10;
+    text-decoration: none;
+    clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+
+    p {
+        font-size: 0.75vw;
+        letter-spacing: 0.05vw;
+    }
+}

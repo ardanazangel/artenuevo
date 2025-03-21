@@ -1,0 +1,26 @@
+#navbar__wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    /* Add this line */
+    width: 100%;
+    z-index: 9999999999999999999999999999999999;
+}
+
+ul {
+    display: flex;
+    text-decoration: none;
+    list-style: none;
+    width: 100%;
+    justify-content: space-between;
+    padding: 1vw;
+    text-transform: uppercase;
+}
+
+.navbar__element {
+    font-family: "Helv Regular";
+    font-size: 1vw;
+    letter-spacing: 0.05vw;
+    font-weight: 400;
+    color: #ffffff;
+}

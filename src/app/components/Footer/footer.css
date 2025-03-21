@@ -1,0 +1,14 @@
+#footer__section {
+    height: 200vh;
+    background-color: var(--dark-color);
+    position: relative;
+}
+
+.footer {
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--light-color);
+    position: sticky;
+    top: 0;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+}

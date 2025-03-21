@@ -1,0 +1,179 @@
+img {
+    max-height: 100vh;
+    height: 100%;
+    object-fit: cover;
+    width: 50vw;
+    will-change: transform;
+    aspect-ratio: 16/9;
+}
+
+.projects-section {
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+
+}
+
+.mask {
+    height: auto;
+    background-color: #ffffff;
+    mix-blend-mode: lighten;
+    width: 100%;
+    position: relative;
+    padding-top: 100vh;
+    top: -100vh;
+    /* padding-bottom: 100vh; */
+}
+
+.project-cover {
+    background-color: black;
+    min-width: 5vw;
+    min-height: 5vw;
+    will-change: auto;
+    position: absolute;
+    pointer-events: all;
+    cursor: pointer;
+    transform-origin: bottom left;
+}
+
+
+.square {
+    aspect-ratio: 1;
+    width: 10vw;
+}
+
+.rectangle-v {
+    height: 10vw;
+}
+
+.rectangle-h {
+    aspect-ratio: 18/9;
+    height: 10vw;
+}
+
+.rectangle-l {
+    aspect-ratio: 4/3;
+    height: 10vw;
+}
+
+.row {
+    height: 50vh;
+    display: flex;
+    align-items: center;
+}
+
+.project-cover-wrapper {
+    z-index: 2;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    padding-bottom: 50vh;
+}
+
+.project-cover-wrapper-info {
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.cover-secondary-container {
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    display: flex;
+    height: 100vh;
+
+    .secondary-container-left,
+    .secondary-container-right {
+        width: 50vw;
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .project-cover {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
+}
+
+.images-background {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    position: fixed;
+    top: 0;
+    z-index: -1;
+    background-color: var(--light-color);
+}
+
+.img {
+    object-fit: cover;
+    height: 100%;
+    position: absolute;
+    display: flex;
+}
+
+.img-container {
+    width: 100%;
+    position: relative;
+}
+
+.img-1 {
+    width: 50%;
+    z-index: 10;
+    overflow: hidden;
+}
+
+.img-2 {
+    width: 50%;
+    display: flex;
+    justify-content: end;
+    overflow: hidden;
+    right: 0;
+}
+
+.img-3 {
+    width: 50%;
+    z-index: 10;
+    overflow: hidden;
+}
+
+.img-4 {
+    width: 50%;
+    display: flex;
+    justify-content: end;
+    overflow: hidden;
+    right: 0;
+}
+
+.cover-1 {
+    left: 1vw;
+}
+
+.cover-2 {
+    left: 30vw;
+}
+
+.info {
+    position: absolute;
+    padding-top: 12vw;
+}
+
+.cover-3 {
+    left: 55vw;
+}
+
+.cover-4 {
+    left: 80vw;
+}
