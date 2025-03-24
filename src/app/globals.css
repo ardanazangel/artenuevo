@@ -24,7 +24,7 @@
   box-sizing: border-box;
 }
 
-html {
+/* html {
   overflow: -moz-scrollbars-none;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -32,7 +32,7 @@ html {
 
 html::-webkit-scrollbar {
   display: none;
-}
+} */
 
 body {
   overflow-x: hidden;
@@ -140,4 +140,8 @@ p {
 #footer__section {
   z-index: 10;
   margin-top: -100vh;
+}
+
+#page_content_total {
+  display: none;
 }

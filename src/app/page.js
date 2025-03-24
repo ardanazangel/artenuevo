@@ -14,11 +14,11 @@ export default async function Home() {
   return (
     <div>
       <ScrollTop />
-      <TotalScroll />
-      <section id="projects__section">
+      {/* <TotalScroll /> */}
+      {/* <section id="projects__section">
         <ProjectSection data={data} />
-      </section>
-      <Footer />
+      </section> */}
+      {/* <Footer /> */}
     </div>
   );
 }

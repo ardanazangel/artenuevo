@@ -10,8 +10,6 @@ img {
 .projects-section {
     position: relative;
     z-index: 1;
-    opacity: 0;
-
 }
 
 .mask {
@@ -32,8 +30,7 @@ img {
     will-change: auto;
     position: absolute;
     pointer-events: all;
-    cursor: pointer;
-    transform-origin: bottom left;
+    cursor: default;
 }
 
 

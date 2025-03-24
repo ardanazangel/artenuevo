@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CustomEase } from "gsap/CustomEase";
-import Footer from "../Footer";
 import { usePathname } from "next/navigation";
 
 gsap.registerPlugin(ScrollTrigger);

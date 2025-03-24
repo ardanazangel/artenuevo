@@ -6,6 +6,7 @@ import { Flip, CustomEase } from "gsap/all";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import "./proyectos.css";
 import ClickButtonMarker from "../ClickButton";
 import Link from "next/link";
@@ -20,9 +21,6 @@ export default function Proyectos({ data }) {
   const router = useRouter();
   const pathname = usePathname();
 
-  useEffect(() => {
-    CustomEase.create("inOutQuart", "0.65, 0, 0.22, 1");
-  }, []);
   // Configuración de covers e imagenes
   const getRandomPosition = (index) => {
     const pattern = [3, 1, 4, 2]; // Patrón predefinido
@@ -36,23 +34,76 @@ export default function Proyectos({ data }) {
   }));
 
   useEffect(() => {
+    if (pathname === "/") {
+      const covers = document.querySelectorAll(".project-cover");
+      covers.forEach((cover) => {
+        const originalParent = cover.parentElement;
+        const originalNextSibling = cover.nextSibling;
+        const secondState = Flip.getState(cover);
+
+        console.log(secondState);
+        if (originalNextSibling) {
+          originalParent.insertBefore(cover, originalNextSibling);
+        } else {
+          originalParent.appendChild(cover);
+        }
+
+        Flip.from(secondState, {
+          duration: 0.9,
+          ease: "inOutQuart",
+          absolute: true,
+        });
+
+        gsap.to(cover, {
+          scale: 1,
+          duration: 0.8,
+          delay: 1,
+          ease: "inOutQuart",
+          onComplete: () => {
+            cover.style.pointerEvents = "auto";
+          },
+        });
+      });
+
+      gsap.set(".row-info", { opacity: 0 });
+      gsap.to(".row-info", {
+        opacity: 1,
+        duration: 0.2,
+        delay: 0.8,
+      });
+
+      gsap.to(".img", {
+        opacity: 1,
+        duration: 0,
+        display: "flex",
+        width: "50%",
+        delay: 1,
+        zIndex: "",
+      });
+
+      if (window.lenis) window.lenis.start();
+    }
+  }, [pathname]);
+
+  useEffect(() => {
+    CustomEase.create("inOutQuart", "0.65, 0, 0.22, 1");
     const covers = document.querySelectorAll(".project-cover");
     let isAnimating = false;
     let hoverTimeout = null;
 
     covers.forEach((cover) => {
       let originalParent = cover.parentElement;
+      let originalNextSibling = cover.nextSibling;
       let imgNumber = cover.dataset.img;
 
       cover.addEventListener("mouseenter", () => {
-        if (isAnimating || pathname !== "/") return; // Verificación de pathname
+        if (isAnimating || cover.classList.contains("clicked")) return;
 
         clearTimeout(hoverTimeout);
         hoverTimeout = setTimeout(() => {
           isAnimating = true;
 
           if (window.lenis) window.lenis.stop();
-
           const state = Flip.getState(cover);
 
           const targetContainer = cover.classList.contains("left")
@@ -69,7 +120,9 @@ export default function Proyectos({ data }) {
                 scale: 0,
                 duration: 0.4,
                 ease: "inOutQuart",
-                pointerEvents: "none", // Deshabilitar eventos de ratón para el cover que se mueve
+                onComplete: () => {
+                  otherCover.style.pointerEvents = "none";
+                },
               });
             }
           });
@@ -98,17 +151,22 @@ export default function Proyectos({ data }) {
 
       cover.addEventListener("mouseleave", () => {
         clearTimeout(hoverTimeout);
-        if (isAnimating || pathname !== "/") return; // Verificación de pathname
+        if (isAnimating || cover.classList.contains("clicked")) return;
+
         isAnimating = true;
         if (window.lenis) window.lenis.start();
-
         const secondState = Flip.getState(cover);
 
-        originalParent.appendChild(cover);
+        if (originalNextSibling) {
+          originalParent.insertBefore(cover, originalNextSibling);
+        } else {
+          originalParent.appendChild(cover);
+        }
 
         Flip.from(secondState, {
           duration: 0.9,
           ease: "inOutQuart",
+          absolute: true,
         });
 
         covers.forEach((otherCover) => {
@@ -126,7 +184,6 @@ export default function Proyectos({ data }) {
         });
 
         gsap.set(".row-info", { opacity: 0 });
-
         gsap.to(".row-info", {
           opacity: 1,
           duration: 0.2,
@@ -143,8 +200,44 @@ export default function Proyectos({ data }) {
           onComplete: () => (isAnimating = false),
         });
       });
+
+      cover.addEventListener("click", () => {
+        if (window.lenis) window.lenis.stop();
+        // Correctly handle the click event
+        if (!cover.classList.contains("clicked")) {
+          cover.classList.add("clicked");
+          console.log("Cover clicked");
+        } else {
+          cover.classList.remove("clicked");
+          console.log("Cover reset");
+        }
+      });
     });
-  }, [pathname]);
+  }, []);
+
+  // Animación de scroll
+  useEffect(() => {
+    const rows = document.querySelectorAll(".row");
+
+    gsap.to(".projects-section", {
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#projects__section",
+        start: "top bottom",
+        end: "top bottom",
+        scrub: true,
+      },
+    });
+    gsap.to(".images-background", {
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#projects__section",
+        start: "80% bottom",
+        end: "bottom bottom",
+        scrub: true,
+      },
+    });
+  }, []);
 
   // Cambio de las imágenes según la posición definida
   useEffect(() => {

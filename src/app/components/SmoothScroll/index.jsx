@@ -10,6 +10,7 @@ export default function SmoothScroll() {
   useEffect(() => {
     const lenis = new Lenis({
       smooth: true,
+      duration: 2,
     });
 
     window.lenis = lenis;

@@ -1,0 +1,18 @@
+#page_content {
+    min-height: 200vh;
+}
+
+#page_content_total {
+    height: 100vh;
+    z-index: 999999;
+    position: fixed;
+    top: 0;
+    left: 1vw;
+    /* pointer-events: none; */
+    overflow: scroll;
+    width: 50%;
+}
+
+h2 {
+    color: black !important;
+}
